@@ -8,15 +8,22 @@ public class BulletController : MonoBehaviour
 
     public GameObject target = null;
     private float speed = 10f;
-    float damage = 10f;
+    public float bulletDamage;
+
     void Start()
     {
+        /*this.bulletDamage = this.transform.parent.GetComponent<TowerController>().damage;*/
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        translateToTarget();
+        translateToTarget();        
+    }
+
+    public void SetDamage(float tower_damage)
+    {
+        this.bulletDamage = tower_damage;
     }
 
     public void SetTarget(GameObject target){
@@ -43,7 +50,7 @@ public class BulletController : MonoBehaviour
     }
 
     private IEnumerator DestroyObject(){
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.4f);
         Destroy(this.gameObject);
     }
 

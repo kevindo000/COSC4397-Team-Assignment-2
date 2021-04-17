@@ -2,17 +2,113 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Vector3.MoveTowards example.
+
+// A cube can be moved around the world. It is kept inside a 1 unit by 1 unit
+// xz space. A small, long cylinder is created and positioned away from the center of
+// the 1x1 unit. The cylinder is moved between two locations. Each time the cylinder is
+// positioned the cube moves towards it. When the cube reaches the cylinder the cylinder
+// is re-positioned to the other location. The cube then changes direction and moves
+// towards the cylinder again.
+//
+// A floor object is created for you.
+//
+// To view this example, create a new 3d Project and create a Cube placed at
+// the origin. Create Example.cs and change the script code to that shown below.
+// Save the script and add to the Cube.
+//
+// Now run the example.
+
 public class EnemyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // Adjust the speed for the application.
+    public float speed;
+    private Transform target;
+    public GameObject[] pathTokens;
+    private int i = 0;
+    private int playerHealth = 100;
+    private float towerAttack;
+    public int attackStrength;
+
+    // The greater the number for attack speed the slower the attack
+    public float attackSpeed;
+    public float health = 100.0f;
+
+    private void Start()
+    {
+        // Position the cube at the origin.
+        transform.position = new Vector3(0.0f, 0.0f, 0.0f);
+
+        // Grab pathTokens values and place on the target.
+        target = pathTokens[i].transform;
+
+        // Movement();
+    }
+
+    /*void Awake()
     {
         
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (playerHealth <= 0)
+        {
+            Debug.Log("GAME OVER");
+        }
+        if (health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+        float step = speed * Time.deltaTime; // calculate distance to move
+        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+        if (Vector3.Distance(transform.position, target.position) < 0.001f)
+        {
+            i++;
+            if (i < pathTokens.Length)
+            {
+                target = pathTokens[i].transform;
+            }
+
+        }
+
+        if (i == pathTokens.Length)
+        {
+            Debug.Log("START");
+            StartCoroutine(Waiter());
+            i = pathTokens.Length + 1;
+        }
+        else if (i > pathTokens.Length)
+        {
+            /*health -= 1;
+            Debug.Log("health = " + health);*/
+            i = pathTokens.Length + 1;
+        }
+    }
+
+    IEnumerator Waiter()
+    {
+        while (playerHealth > 0)
+        {
+            Debug.Log("Player's Health: " + playerHealth);
+            yield return new WaitForSeconds(attackSpeed);
+            playerHealth -= attackStrength;
+        }
+
+        Debug.Log("Player is dead");
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        // InvokeRepeating("LaunchProjectile", 0f, 1f);
+        if (other.gameObject.tag == "Bullet")
+        {
+            Debug.Log("Hit");
+            towerAttack = other.GetComponent<BulletController>().bulletDamage;
+            Debug.Log("Tower Attack: " + towerAttack);
+            health -= towerAttack;
+        }
+
     }
 }

@@ -13,6 +13,7 @@ public class TowerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -27,11 +28,14 @@ public class TowerController : MonoBehaviour
             newBullet.SetActive(true);
             BulletController controller = newBullet.GetComponent<BulletController>();
             controller.SetTarget(detectedEnemyObject);
+            controller.SetDamage(damage);
         } else {
             Debug.Log("No enemy detected, cancel firing");
             CancelInvoke("LaunchProjectile");
         }
     }
+
+    
 
     private void OnTriggerStay(Collider other)
     {
