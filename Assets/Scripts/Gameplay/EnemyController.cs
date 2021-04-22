@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Vector3.MoveTowards example.
 
@@ -29,10 +30,13 @@ public class EnemyController : MonoBehaviour
     private int playerHealth = 100;
     private float towerAttack;
     public int attackStrength;
+    public Slider healthBar;
+    public GameObject healthBarUI;
 
     // The greater the number for attack speed the slower the attack
     public float attackSpeed;
-    public float health = 100.0f;
+    public float maxHealth = 100.0f;
+    public float health;
 
     private void Start()
     {
@@ -41,7 +45,9 @@ public class EnemyController : MonoBehaviour
 
         // Grab pathTokens values and place on the target.
         target = pathTokens[i].transform;
-
+        
+        health = maxHealth;        
+        healthBar.value = CalculateHealth();
         // Movement();
     }
 
@@ -53,9 +59,16 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthBar.value = CalculateHealth();
         if (playerHealth <= 0)
         {
             Debug.Log("GAME OVER");
+        }
+        if(health < maxHealth){
+            healthBarUI.SetActive(true);
+        }
+        if(health > maxHealth){
+            health = maxHealth;
         }
         if (health <= 0)
         {
@@ -110,5 +123,8 @@ public class EnemyController : MonoBehaviour
             health -= towerAttack;
         }
 
+    }
+    public float CalculateHealth(){
+        return health/maxHealth;
     }
 }
