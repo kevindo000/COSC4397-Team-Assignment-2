@@ -53,7 +53,7 @@ public class TowerPurchaseManager : MonoBehaviour
                 temp.transform.localScale = new Vector3(10, 10, 10);
                 temp.AddComponent(typeof(CharacterController));
                 temp.AddComponent(typeof(SphereCollider));
-                temp.GetComponent<SphereCollider>().radius = 0;
+                temp.GetComponent<SphereCollider>().radius = 15;
                 temp.GetComponent<SphereCollider>().isTrigger = false;
                 temp.AddComponent(typeof(Move3D));
                 temp.GetComponent<Move3D>().a = t.attr;
