@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d075b92f6fdedcd4abd888eac53bfc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 5.8
   pathTokens:
   - {fileID: 1631375862}
   - {fileID: 1350731051}
@@ -695,7 +695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &754137370
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -896,7 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 534983438}
-  damage: 15.17
+  damage: 5.05
   fireRate: 2
 --- !u!23 &1051054159
 MeshRenderer:
