@@ -35,12 +35,11 @@ public class TowerController : MonoBehaviour
         }
     }
 
-    
 
     private void OnTriggerStay(Collider other)
     {
         // InvokeRepeating("LaunchProjectile", 0f, 1f);
-        if(other.gameObject.tag == "Enemy" && detectedEnemyObject == null){
+        if(other.gameObject.tag == "Enemy" && detectedEnemyObject == null && !IsInvoking("LaunchProjectile")){
             detectedEnemyObject = other.gameObject;
             InvokeRepeating("LaunchProjectile", 0f, fireRate);
         }
@@ -48,7 +47,7 @@ public class TowerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other) {
         // CancelInvoke("LaunchProjectile");
-        if(other.gameObject.tag == "Enemy"){
+        if(other.gameObject == detectedEnemyObject){
             detectedEnemyObject = null;
             CancelInvoke("LaunchProjectile");
         }

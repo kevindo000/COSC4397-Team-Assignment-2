@@ -36,9 +36,6 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        // Position the cube at the origin.
-        transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-
         // Grab pathTokens values and place on the target.
         target = pathTokens[i].transform;
 
@@ -101,7 +98,6 @@ public class EnemyController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        // InvokeRepeating("LaunchProjectile", 0f, 1f);
         if (other.gameObject.tag == "Bullet")
         {
             Debug.Log("Hit");
@@ -109,6 +105,7 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Tower Attack: " + towerAttack);
             health -= towerAttack;
         }
+
 
     }
 }
