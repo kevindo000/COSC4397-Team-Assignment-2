@@ -32,6 +32,7 @@ public class EnemyController : MonoBehaviour
     public int attackStrength;
     public Slider healthBar;
     public GameObject healthBarUI;
+    public Image Fill;
 
     // The greater the number for attack speed the slower the attack
     public float attackSpeed;
@@ -40,9 +41,6 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        // Position the cube at the origin.
-        transform.position = new Vector3(0.0f, 0.0f, 0.0f);
-
         // Grab pathTokens values and place on the target.
         target = pathTokens[i].transform;
         
@@ -69,6 +67,13 @@ public class EnemyController : MonoBehaviour
         }
         if(health > maxHealth){
             health = maxHealth;
+        }
+        if(health < maxHealth*.3f){
+            if(health % 3 == 0){
+                healthBarUI.GetComponentInChildren<Image>().color = Color.white;
+            } else{
+                healthBarUI.GetComponentInChildren<Image>().color = Color.red;
+            }
         }
         if (health <= 0)
         {
@@ -114,7 +119,6 @@ public class EnemyController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        // InvokeRepeating("LaunchProjectile", 0f, 1f);
         if (other.gameObject.tag == "Bullet")
         {
             Debug.Log("Hit");
@@ -122,6 +126,7 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Tower Attack: " + towerAttack);
             health -= towerAttack;
         }
+
 
     }
     public float CalculateHealth(){

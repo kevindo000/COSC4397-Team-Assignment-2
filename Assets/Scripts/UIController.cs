@@ -21,7 +21,6 @@ public class UIController : MonoBehaviour {
         descriptionText.text = objectAttributes.Description;
         costText.text = String.Format("{0}",objectAttributes.Cost);;
         healthText.text = String.Format("{0}",objectAttributes.Health);;
-        
     }
 
     public void SetAttributesToEmpty()

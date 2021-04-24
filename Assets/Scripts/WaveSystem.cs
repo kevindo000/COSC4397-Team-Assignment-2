@@ -10,7 +10,7 @@ public class WaveSystem : MonoBehaviour
     public class Wave
     {
         public string name;
-        public Transform enemy;
+        public GameObject enemyPrefab;
         public int count;
         public float rate;
     }
@@ -22,7 +22,7 @@ public class WaveSystem : MonoBehaviour
 
     public int maxWaves = 5;
 
-    public float timeBetweenWaves = 10f;
+    public float timeBetweenWaves = 2f;
     private float waveCountdown;
 
     private float searchCountdown = 1f;
@@ -53,7 +53,6 @@ public class WaveSystem : MonoBehaviour
             {
                 return;
             }
-
         }
 
         if (waveCountdown <= 0)
@@ -105,21 +104,21 @@ public class WaveSystem : MonoBehaviour
 
         for (int i=0; i <_wave.count;i++)
         {
-            SpawnEnemy(_wave.enemy);
+            SpawnEnemy(_wave.enemyPrefab);
             yield return new WaitForSeconds(1f / _wave.rate);
         }
-
 
         state = SpawnState.WAITING;
 
         yield break;
     }
 
-    void SpawnEnemy(Transform _enemy)
+    void SpawnEnemy( GameObject enemyPrefab)
     {
         //Spawn enemy at random spawn point(s)
         Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(_enemy, transform.position, transform.rotation);
+
+        Instantiate(enemyPrefab, _sp.position, Quaternion.identity);
     }
 
 
