@@ -32,6 +32,7 @@ public class EnemyController : MonoBehaviour
     public int attackStrength;
     public Slider healthBar;
     public GameObject healthBarUI;
+    public Image Fill;
 
     // The greater the number for attack speed the slower the attack
     public float attackSpeed;
@@ -66,6 +67,13 @@ public class EnemyController : MonoBehaviour
         }
         if(health > maxHealth){
             health = maxHealth;
+        }
+        if(health < maxHealth*.3f){
+            if(health % 3 == 0){
+                healthBarUI.GetComponentInChildren<Image>().color = Color.white;
+            } else{
+                healthBarUI.GetComponentInChildren<Image>().color = Color.red;
+            }
         }
         if (health <= 0)
         {

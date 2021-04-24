@@ -7,7 +7,7 @@ public class TowerController : MonoBehaviour
 
     public GameObject projectile;
     private GameObject detectedEnemyObject;
-    public float damage;
+    public float damage=10;
     public float fireRate = 2f; 
 
     // Start is called before the first frame update
