@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -125,6 +125,7 @@ public class EnemyController : MonoBehaviour
             towerAttack = other.GetComponent<BulletController>().bulletDamage;
             Debug.Log("Tower Attack: " + towerAttack);
             health -= towerAttack;
+            SoundManager.PlaySound(SoundManager.Sound.playerHit);
         }
 
 

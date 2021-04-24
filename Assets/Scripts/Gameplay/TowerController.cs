@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,21 +7,13 @@ public class TowerController : MonoBehaviour
 
     public GameObject projectile;
     private GameObject detectedEnemyObject;
-    public float damage=10;
+    public float damage;
     public float fireRate = 2f; 
 
     // Start is called before the first frame update
-    void Start()
-    {
-
+    void Awake(){
+        damage = 5.0f;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void LaunchProjectile(){
         if(detectedEnemyObject!=null){
             GameObject newBullet = GameObject.Instantiate(projectile, this.transform.position, Quaternion.identity); 
@@ -29,6 +21,8 @@ public class TowerController : MonoBehaviour
             BulletController controller = newBullet.GetComponent<BulletController>();
             controller.SetTarget(detectedEnemyObject);
             controller.SetDamage(damage);
+            Debug.Log(damage);
+            SoundManager.PlaySound(SoundManager.Sound.towerShoot);
         } else {
             Debug.Log("No enemy detected, cancel firing");
             CancelInvoke("LaunchProjectile");
