@@ -17,6 +17,10 @@ This is the final repository for Immersive Spatial Tech
 3. Wrote the UIController.cs to programatically control the UI
 4. Brought the active object to ImageTarget on ARCam
 5. Helped with the ShopManager.cs
+6. Added tower controller
+7. Added bullet controller
+8. Make tower shoots at enemy object if in range
+9. Implemented a game manager to store player health and when enemy touches the trigger, player health will be deducted.
 ## Henry Hite
 1. Presented video of our working shop.
 2. Added rotate/scale for loaded objects
