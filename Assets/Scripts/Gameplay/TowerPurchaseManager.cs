@@ -9,14 +9,13 @@ using System;
 
 public class TowerPurchaseManager : MonoBehaviour
 {
-    private long money = 10000000;
-
     private List<GameObject> buttonAssets;
     private Dictionary<string, Tower> towers;
     public List<GameObject> availTowers;
 
     public GameObject projectile;
     public GameObject canvas;
+    public GlobalState glob;
 
     public string towerURL = string.Empty;
     public string attrURL = string.Empty;
@@ -30,40 +29,30 @@ public class TowerPurchaseManager : MonoBehaviour
         {
             Tower t = towers[name];
             long price = t.attr.Cost;
-            if(price > money)
+            if (glob.money - price >= 0)
             {
-                Debug.LogError("The cost is too big!");
-                return false;
-            }
-            else
-            {
-                Debug.Log(string.Format("Purchasing a {0} ({1} -> {2})", name, money, money - price));
-                money -= price;
+                glob.money -= price;
                 GameObject temp = Instantiate(t.obj);
                 temp.SetActive(true);
-                //if(name == "ice_cream_cone")
-                //{
-                //    temp.transform.localScale = new Vector3(100, 100, 100);
-                //    temp.AddComponent(typeof(MeshRenderer));
-                //}
-                //else
-                //{
-                //    temp.transform.localScale = new Vector3(10, 10, 10);
-                //}
                 temp.transform.localScale = new Vector3(10, 10, 10);
                 temp.AddComponent(typeof(CharacterController));
                 temp.AddComponent(typeof(SphereCollider));
-                temp.GetComponent<SphereCollider>().radius = 0;
+                temp.GetComponent<SphereCollider>().radius = 15;
                 temp.GetComponent<SphereCollider>().isTrigger = false;
                 temp.AddComponent(typeof(Move3D));
                 temp.GetComponent<Move3D>().a = t.attr;
                 temp.GetComponent<Move3D>().projectile = projectile;
-                if(name == "ice_cream_cone")
+                if (name == "ice_cream_cone")
                 {
-                    temp.transform.localScale = new Vector3(50, 50, 50);
+                    temp.transform.localScale = new Vector3(100, 100, 100);
                 }
                 availTowers.Add(temp);
                 return true;
+            }
+            else
+            {
+                Debug.LogError("The cost is too big!");
+                return false;
             }
         }
         else
@@ -121,8 +110,9 @@ public class TowerPurchaseManager : MonoBehaviour
                     GameObject mybtn = Instantiate(btn);
                     mybtn.SetActive(true);
                     mybtn.transform.SetParent(canvas.transform);
-                    mybtn.transform.position = new Vector3(xpos + 50, 50, 0);
-                    xpos += 100;
+                    mybtn.transform.position = new Vector3(xpos + 25, 25, 0);
+                    mybtn.transform.localScale = new Vector3(0.5f, 0.5f, 0);
+                    xpos += 50;
                     string newname = t.name.Substring(0, t.name.Length - 4);
                     mybtn.GetComponent<Button>().onClick.AddListener(() => ButtonPress(newname));
                     buttonAssets.Add(mybtn);
