@@ -25,6 +25,7 @@ public class Move3D : MonoBehaviour
 
     void OnMouseDrag()
     {
+        Vector3 mouse = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         if (canMove)
         {
             Vector3 ScreenPosition =
