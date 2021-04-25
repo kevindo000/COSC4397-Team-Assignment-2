@@ -6,6 +6,9 @@ This is the final repository for Immersive Spatial Tech
 1. Designed the front UI and look of buttons and icons.
 2. Prepared presentation.
 3. Providing the Vuforia database and targets
+4. Made the enemy wave system script
+5. Made a map texture and tower icons for spawning
+6. Set up arrangement for global health and money ui
 ## Gal Egozi
 1. Setup the asset loading from Azure, including the logic for switching between the different models.
 2. Implemented the loading for the properties as individual JSON files (one for each object) from Azure into a C# object.
