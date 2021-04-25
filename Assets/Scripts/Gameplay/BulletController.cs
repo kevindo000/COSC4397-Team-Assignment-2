@@ -28,10 +28,10 @@ public class BulletController : MonoBehaviour
 
     public void SetTarget(GameObject target){
         if(target == null){
-            Debug.Log("set target");
+            DestroyObject(this.gameObject);
+
         } else {
             this.target = target;
-            Debug.Log("TAG " + this.target);
             this.gameObject.SetActive(true);
         }
     }
@@ -46,6 +46,8 @@ public class BulletController : MonoBehaviour
                      target.transform.position.z - this.gameObject.transform.position.z  
                 );
             this.gameObject.transform.Translate(Vector3.Normalize(movement) * Time.deltaTime * speed);
+        } else {
+            DestroyObject(this.gameObject);
         }
     }
 
@@ -54,16 +56,16 @@ public class BulletController : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void OnTriggerEnter(Collider other) {
-        other.gameObject.GetComponent<EnemyController>();
-    }
+    // private void OnTriggerEnter(Collider other) {
+    //     other.gameObject.GetComponent<EnemyController>();
+    // }
 
-    private void OnTriggerStay(Collider other)
-    {
-        // InvokeRepeating("LaunchProjectile", 0f, 1f);
-        if(other.gameObject.tag == "Enemy"){
-            StartCoroutine(DestroyObject());
-        }
+    // private void OnTriggerStay(Collider other)
+    // {
+    //     // InvokeRepeating("LaunchProjectile", 0f, 1f);
+    //     if(other.gameObject.tag == "Enemy"){
+    //         StartCoroutine(DestroyObject());
+    //     }
 
-    }
+    // }
 }
