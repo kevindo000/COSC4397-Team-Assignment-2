@@ -36,4 +36,7 @@ This is the final repository for Immersive Spatial Tech
 1. Presented video of our working shop.
 2. Added rotate/scale for loaded objects
 ## Phuc Vo
-1. Help in anchoring UI elements
+1. Help in anchoring UI elements.
+2. Implement sound system.
+3. Adding health bar on top of enemies.
+4. Assisting other teammates.
