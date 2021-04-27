@@ -22,7 +22,6 @@ public class TowerController : MonoBehaviour
             controller.SetTarget(detectedEnemyObject);
             controller.SetDamage(damage);
             Debug.Log(damage);
-            SoundManager.PlaySound(SoundManager.Sound.towerShoot);
         } else {
             Debug.Log("No enemy detected, cancel firing");
             CancelInvoke("LaunchProjectile");
