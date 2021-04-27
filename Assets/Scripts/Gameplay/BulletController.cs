@@ -13,6 +13,7 @@ public class BulletController : MonoBehaviour
     void Start()
     {
         /*this.bulletDamage = this.transform.parent.GetComponent<TowerController>().damage;*/
+            SoundManager.PlaySound(SoundManager.Sound.towerShoot);
     }
 
     // Update is called once per frame
