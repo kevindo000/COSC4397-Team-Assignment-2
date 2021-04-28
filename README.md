@@ -35,6 +35,8 @@ This is the final repository for Immersive Spatial Tech
 ## Henry Hite
 1. Presented video of our working shop.
 2. Added rotate/scale for loaded objects
+3. Created the enemy controller
+4. Implemented the enemy 3D model
 ## Phuc Vo
 1. Help in anchoring UI elements.
 2. Implement sound system.
