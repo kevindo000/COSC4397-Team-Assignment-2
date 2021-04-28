@@ -11,7 +11,7 @@ public class GlobalState : MonoBehaviour
 
     public void setText()
     {
-        string temp = "Money: " + money.ToString() + '\n' + "Health: " + health.ToString();
+        string temp = money.ToString() + '\n' + health.ToString();
         infoBox.text = temp;
     }
 
@@ -37,4 +37,5 @@ public class GlobalState : MonoBehaviour
         money = 650;
         health = 100;
     }
+
 }

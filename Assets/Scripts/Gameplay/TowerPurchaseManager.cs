@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.SceneManagement;
 
 public class TowerPurchaseManager : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class TowerPurchaseManager : MonoBehaviour
     public string towerURL = string.Empty;
     public string attrURL = string.Empty;
     public string btnURL = string.Empty;
-    int xpos = 0;
+    private bool isstartdone = false;
     // Start is called before the first frame update
 
     private bool Purchase(string name)
@@ -81,9 +82,9 @@ public class TowerPurchaseManager : MonoBehaviour
             yield return tower_req.SendWebRequest();
             AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(tower_req);
             UnityEngine.Object[] temp = bundle.LoadAllAssets();
-            foreach(UnityEngine.Object t in temp)
+            foreach (UnityEngine.Object t in temp)
             {
-                if(t.GetType() == typeof(GameObject))
+                if (t.GetType() == typeof(GameObject))
                 {
                     Debug.Log(t.name);
                     GameObject go = (GameObject)t;
@@ -93,17 +94,19 @@ public class TowerPurchaseManager : MonoBehaviour
                     towers[go.name] = tempTower;
                 }
             }
+            bundle.Unload(false);
         }
         //TODO: LOAD BUTTONS
         buttonAssets = new List<GameObject>();
-        using(UnityWebRequest button_req = UnityWebRequestAssetBundle.GetAssetBundle(btnURL, 0))
+        using (UnityWebRequest button_req = UnityWebRequestAssetBundle.GetAssetBundle(btnURL, 0))
         {
+            int xpos = 0;
             yield return button_req.SendWebRequest();
             AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(button_req);
             UnityEngine.Object[] temp = bundle.LoadAllAssets();
-            foreach(UnityEngine.Object t in temp)
+            foreach (UnityEngine.Object t in temp)
             {
-                if(t.GetType() == typeof(GameObject))
+                if (t.GetType() == typeof(GameObject))
                 {
                     Debug.Log(t.name);
                     GameObject btn = (GameObject)t;
@@ -122,13 +125,15 @@ public class TowerPurchaseManager : MonoBehaviour
                     Debug.LogError(t.name + " " + t.GetType());
                 }
             }
+            bundle.Unload(false);
         }
+        isstartdone = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ButtonPress(string button)
@@ -141,5 +146,10 @@ public class TowerPurchaseManager : MonoBehaviour
         {
             Debug.Log("Could not purchase " + button);
         }
+    }
+
+    public void ExitGame()
+    {
+        if (isstartdone) SceneManager.LoadScene("ShopScene");
     }
 }

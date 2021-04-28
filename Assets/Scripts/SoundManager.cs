@@ -8,8 +8,11 @@ public static class SoundManager
         towerShoot,
         playerHit,
     }
+    private static GameObject soundGameObject = null;
     public static void PlaySound(Sound sound){
-        GameObject soundGameObject = new GameObject("Sound");
+        if(soundGameObject == null){
+            soundGameObject = new GameObject("Sound");
+        }
         AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
         audioSource.PlayOneShot(GetAudioClip(sound));
     }

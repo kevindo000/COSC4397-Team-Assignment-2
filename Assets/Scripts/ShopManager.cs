@@ -141,7 +141,7 @@ public class ShopManager : MonoBehaviour
 
     public void ExitShop()
     {
-        if(isStartDone) SceneManager.LoadScene("MainScene");
+        if(isStartDone) SceneManager.LoadScene("GameplayScene");
     }
 
     public void BuyMe()
