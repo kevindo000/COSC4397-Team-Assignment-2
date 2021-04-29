@@ -57,16 +57,4 @@ public class BulletController : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    // private void OnTriggerEnter(Collider other) {
-    //     other.gameObject.GetComponent<EnemyController>();
-    // }
-
-    // private void OnTriggerStay(Collider other)
-    // {
-    //     // InvokeRepeating("LaunchProjectile", 0f, 1f);
-    //     if(other.gameObject.tag == "Enemy"){
-    //         StartCoroutine(DestroyObject());
-    //     }
-
-    // }
 }
