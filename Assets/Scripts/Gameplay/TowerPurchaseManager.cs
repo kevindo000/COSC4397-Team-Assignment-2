@@ -16,6 +16,7 @@ public class TowerPurchaseManager : MonoBehaviour
 
     public GameObject projectile;
     public GameObject canvas;
+    public GameObject ImgTarget;
     public GlobalState glob;
 
     public string towerURL = string.Empty;
@@ -43,11 +44,13 @@ public class TowerPurchaseManager : MonoBehaviour
                 temp.AddComponent(typeof(Move3D));
                 temp.GetComponent<Move3D>().a = t.attr;
                 temp.GetComponent<Move3D>().projectile = projectile;
+                temp.transform.SetParent(ImgTarget.transform);
                 if (name == "ice_cream_cone")
                 {
                     temp.transform.localScale = new Vector3(100, 100, 100);
                 }
                 availTowers.Add(temp);
+                temp.transform.localPosition = new Vector3(0, 5, 0);
                 return true;
             }
             else
