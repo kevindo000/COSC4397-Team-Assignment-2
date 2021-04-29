@@ -126,6 +126,7 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Tower Attack: " + towerAttack);
             health -= towerAttack;
             SoundManager.PlaySound(SoundManager.Sound.playerHit);
+            Destroy(other.gameObject);
         }
 
 
