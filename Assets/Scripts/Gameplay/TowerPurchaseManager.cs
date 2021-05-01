@@ -14,9 +14,11 @@ public class TowerPurchaseManager : MonoBehaviour
     private Dictionary<string, Tower> towers;
     public List<GameObject> availTowers;
 
+    public Transform towerSpawnPosition;
+
     public GameObject projectile;
     public GameObject canvas;
-    public GameObject ImgTarget;
+    public GameObject towerParentObject;
     public GlobalState glob;
 
     public string towerURL = string.Empty;
@@ -37,20 +39,24 @@ public class TowerPurchaseManager : MonoBehaviour
                 GameObject temp = Instantiate(t.obj);
                 temp.SetActive(true);
                 temp.transform.localScale = new Vector3(10, 10, 10);
+                temp.gameObject.tag = "Tower";
                 temp.AddComponent(typeof(CharacterController));
                 temp.AddComponent(typeof(SphereCollider));
+                temp.AddComponent(typeof(BoxCollider));
                 temp.GetComponent<SphereCollider>().radius = 15;
-                temp.GetComponent<SphereCollider>().isTrigger = false;
-                temp.AddComponent(typeof(Move3D));
-                temp.GetComponent<Move3D>().a = t.attr;
-                temp.GetComponent<Move3D>().projectile = projectile;
-                temp.transform.SetParent(ImgTarget.transform);
+                temp.GetComponent<SphereCollider>().isTrigger = true;
+                temp.AddComponent<TowerController>();
+                temp.GetComponent<TowerController>().SetBulletPrefab(projectile);
+                // temp.AddComponent(typeof(Move3D));
+                // temp.GetComponent<Move3D>().a = t.attr;
+                // temp.GetComponent<Move3D>().projectile = projectile;
+                temp.transform.SetParent(towerParentObject.transform);
                 if (name == "ice_cream_cone")
                 {
                     temp.transform.localScale = new Vector3(100, 100, 100);
                 }
                 availTowers.Add(temp);
-                temp.transform.localPosition = new Vector3(0, 5, 0);
+                temp.transform.position = towerSpawnPosition.position;
                 return true;
             }
             else
@@ -89,7 +95,6 @@ public class TowerPurchaseManager : MonoBehaviour
             {
                 if (t.GetType() == typeof(GameObject))
                 {
-                    Debug.Log(t.name);
                     GameObject go = (GameObject)t;
                     Tower tempTower = new Tower();
                     tempTower.obj = go;
@@ -111,7 +116,7 @@ public class TowerPurchaseManager : MonoBehaviour
             {
                 if (t.GetType() == typeof(GameObject))
                 {
-                    Debug.Log(t.name);
+                    // Debug.Log(t.name);
                     GameObject btn = (GameObject)t;
                     GameObject mybtn = Instantiate(btn);
                     mybtn.SetActive(true);

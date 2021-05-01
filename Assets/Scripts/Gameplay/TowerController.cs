@@ -14,6 +14,12 @@ public class TowerController : MonoBehaviour
     void Awake(){
         damage = 5.0f;
     }
+
+    public void SetBulletPrefab(GameObject projectilePrefab){
+        projectile = Instantiate(projectilePrefab, gameObject.transform.position, Quaternion.identity);
+        projectile.SetActive(false);
+    }
+
     void LaunchProjectile(){
         if(detectedEnemyObject!=null){
             GameObject newBullet = GameObject.Instantiate(projectile, this.transform.position, Quaternion.identity); 
@@ -21,13 +27,10 @@ public class TowerController : MonoBehaviour
             BulletController controller = newBullet.GetComponent<BulletController>();
             controller.SetTarget(detectedEnemyObject);
             controller.SetDamage(damage);
-            Debug.Log(damage);
         } else {
-            Debug.Log("No enemy detected, cancel firing");
             CancelInvoke("LaunchProjectile");
         }
     }
-
 
     private void OnTriggerStay(Collider other)
     {

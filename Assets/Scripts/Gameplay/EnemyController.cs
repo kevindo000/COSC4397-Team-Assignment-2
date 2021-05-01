@@ -93,7 +93,6 @@ public class EnemyController : MonoBehaviour
 
         if (i == pathTokens.Length)
         {
-            Debug.Log("START");
             StartCoroutine(Waiter());
             i = pathTokens.Length + 1;
         }
@@ -114,16 +113,12 @@ public class EnemyController : MonoBehaviour
             playerHealth -= attackStrength;
         }
 
-        Debug.Log("Player is dead");
-
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bullet")
         {
-            Debug.Log("Hit");
             towerAttack = other.GetComponent<BulletController>().bulletDamage;
-            Debug.Log("Tower Attack: " + towerAttack);
             health -= towerAttack;
             SoundManager.PlaySound(SoundManager.Sound.playerHit);
             Destroy(other.gameObject);
