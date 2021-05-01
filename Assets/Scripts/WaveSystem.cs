@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaveSystem : MonoBehaviour
 {
     public enum SpawnState { SPAWNING, WAITING, COUNTING };
-
+    
     [System.Serializable]
     public class Wave
     {
@@ -26,6 +26,7 @@ public class WaveSystem : MonoBehaviour
     private float waveCountdown;
 
     private float searchCountdown = 1f;
+    GameManager gameManagerObject;
 
     private SpawnState state = SpawnState.COUNTING;
 
@@ -117,8 +118,8 @@ public class WaveSystem : MonoBehaviour
     {
         //Spawn enemy at random spawn point(s)
         Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
-
-        Instantiate(enemyPrefab, _sp.position, Quaternion.identity);
+        GameObject go = Instantiate(enemyPrefab, _sp.position, Quaternion.identity) as GameObject;
+        go.transform.parent = transform;
     }
 
 
