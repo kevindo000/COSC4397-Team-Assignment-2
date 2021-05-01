@@ -22,12 +22,12 @@ using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
+    public GlobalState g;
     // Adjust the speed for the application.
     public float speed;
     private Transform target;
     public GameObject[] pathTokens;
     private int i = 0;
-    private int playerHealth = 100;
     private float towerAttack;
     public int attackStrength;
     public Slider healthBar;
@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         healthBar.value = CalculateHealth();
-        if (playerHealth <= 0)
+        if (g.gameOver)
         {
             Debug.Log("GAME OVER");
         }
@@ -77,6 +77,7 @@ public class EnemyController : MonoBehaviour
         }
         if (health <= 0)
         {
+            g.money += 10;
             Destroy(this.gameObject);
         }
         float step = speed * Time.deltaTime; // calculate distance to move
@@ -106,11 +107,11 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator Waiter()
     {
-        while (playerHealth > 0)
+        while (!g.gameOver)
         {
-            Debug.Log("Player's Health: " + playerHealth);
+            //Debug.Log("Player's Health: " + g.h);
             yield return new WaitForSeconds(attackSpeed);
-            playerHealth -= attackStrength;
+            g.health -= attackStrength;
         }
 
     }

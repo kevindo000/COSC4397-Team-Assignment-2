@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    private float playerHealth = 100f;
+    //private float playerHealth = 100f;
+    GlobalState g;
     public GameObject castleObject;
 
     void Start()
@@ -19,16 +20,18 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void TakeDamage(float amount){
-        playerHealth -= amount;
+    public void TakeDamage(int amount){
+        //playerHealth -= amount;
+        g.health -= amount;
     }
 
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "Enemy"){
-            EnemyController enemyController = other.GetComponent<EnemyController>(); 
-            playerHealth -= (float) enemyController.attackStrength;
+            EnemyController enemyController = other.GetComponent<EnemyController>();
+            //playerHealth -= (float) enemyController.attackStrength;
+            g.health -= enemyController.attackStrength;
             Destroy(other.gameObject);
-            Debug.Log(playerHealth);
+            //Debug.Log(playerHealth);
         }
     }
 }

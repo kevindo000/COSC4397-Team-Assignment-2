@@ -34,7 +34,7 @@ public class GlobalState : MonoBehaviour
     public bool gameOver => health < 0;
     void Start()
     {
-        money = 650;
+        money = 1000000;
         health = 100;
     }
 
