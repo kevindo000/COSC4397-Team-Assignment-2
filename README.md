@@ -1,6 +1,9 @@
 # COSC4397-Team-Assignment-2
 This is the final repository for Immersive Spatial Tech
 
+Video Showcase
+https://onedrive.live.com/?authkey=%21APltsagp%2Dd24tvg&cid=41B67871B27B398B&id=41B67871B27B398B%2149982&parId=root&o=OneUp
+
 # Contributions
 ## Kevin Do (Team Lead)
 1. Designed the front UI and look of buttons and icons.
